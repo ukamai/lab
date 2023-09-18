@@ -235,6 +235,7 @@ Connection to 185.5.249.140 closed.
 uka@LAPTOP-RHQOJ899:~$ touch listing
 uka@LAPTOP-RHQOJ899:~$ rm listing
 
-```
 uka@LAPTOP-RHQOJ899:~$ touch listing.md
 uka@LAPTOP-RHQOJ899:~$ nano
+
+```
