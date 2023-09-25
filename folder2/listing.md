@@ -238,4 +238,10 @@ uka@LAPTOP-RHQOJ899:~$ rm listing
 uka@LAPTOP-RHQOJ899:~$ touch listing.md
 uka@LAPTOP-RHQOJ899:~$ nano
 
+"
+tar -c listing.md -f listing_arch.tar.gz -z
+  307  scp listing_arch.tar.gz v_frolov@185.5.249.140:/home/v_frolov
+  312  scp listing_arch.tar.gz v_frolov@185.5.249.140:/home/v_frolov/papka
+"
+
 ```
