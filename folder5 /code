@@ -1,0 +1,132 @@
+00, ,<,01 // сдвиг каретки влево
+01,0,<,01
+01,1,<,01
+01, ,>,cop
+
+
+
+cop,0, ,copdel0 // начала копирования нуля
+copdel0, ,>,cop00
+cop00,0,>,cop00
+cop00,1,>,cop10
+cop10,1,>,cop10
+cop10,0,>,cop00
+cop10, ,>,copyfin0
+cop00, ,>,copyfin0
+copyfin0, ,0,leftfix0
+copyfin0,1,>,copyfin0
+copyfin0,0,>,copyfin0
+
+leftfix0,0,<,leftfix0 // сдвиг влево
+leftfix0,1,<,leftfix0
+leftfix0, ,<,left0
+left0,1,<,left0
+left0,0,<,left0
+left0, ,0,right
+
+right,0,>,if  //сдвиг вправо
+right,1,>,if
+if,1, ,if1
+if,0, ,if0
+if0, ,>,cop00
+if1, ,>,cop01
+if, ,>,task
+
+cop,1, ,copdel1  //копирование единицы
+copdel1, ,>,cop01
+cop01,0,>,cop01
+cop01,1,>,cop11
+cop11,1,>,cop11
+cop11,0,>,cop01
+cop01, ,>,copyfin1
+cop11, ,>,copyfin1
+copyfin1, ,1,leftfix1
+copyfin1,1,>,copyfin1
+copyfin1,0,>,copyfin1
+
+leftfix1,0,<,leftfix1
+leftfix1,1,<,leftfix1
+leftfix1, ,<,left1
+left1,1,<,left1
+left1,0,<,left1
+left1, ,1,right // конец копирования числа
+
+
+
+task,1, ,task1move // задача
+task,0, ,task0move
+task, ,<,taskgluefirst
+
+
+
+task1move, ,>,task1right // копирование единицы
+task1right,0,>,task1right
+task1right,1,>,task1right
+task1right, ,>,task1input
+task1input,1,>,task1input
+task1input,0,>,task1input
+task1input, ,1,moveright
+
+task0move, ,>,task0right // копирование нуля
+task0right,0,>,task0right
+task0right,1,>,task0right
+task0right, ,>,task0input
+task0input,1,>,task0input
+task0input,0,>,task0input
+task0input, ,0,moveright
+
+
+
+moveright,1,<,moveright // сдвиг влево и назад
+moveright,0,<,moveright
+moveright, ,<,moverightold
+moverightold,1,<,moverightold
+moverightold,0,<,moverightold
+moverightold, ,>,moveback
+moveback,0,>,task
+moveback,1,>,task
+moveback, ,<,moveback
+
+
+taskgluefirst,0,<,taskglue
+taskgluefirst,1,<,taskglue
+taskglue, ,<,taskglue
+taskglue,0,<,taskgluecheck
+taskglue,1,<,taskgluecheck
+taskgluecheck, ,<,taskgluecheckfin
+taskgluecheckfin, ,>,finglue
+taskgluecheckfin,1,>,taskgluecheckfin1
+taskgluecheckfin1, ,>,glue
+taskgluecheckfin,0,>,taskgluecheckfin0
+taskgluecheckfin0, ,>,glue
+taskgluecheck,0,0,fin
+taskgluecheck,1,1,fin
+
+
+glue,1, ,glue1 // приклеивает единицу
+glue1, ,>,glue1
+glue1,0,<,glue1_1
+glue1,1,<,glue1_1
+glue1_1, ,1,taskgluefirst
+
+glue,0, ,glue0 // приклеивает ноль
+glue0, ,>,glue0
+glue0,0,<,glue0_1
+glue0,1,<,glue0_1
+glue0_1, ,0,taskgluefirst
+
+
+finglue, ,>,finglue // передвигается к последнему приклеиванию
+
+finglue,1, ,finglue1 // приклеивает последнюю единицу
+finglue1, ,>,finglue1
+finglue1,1,<,finglue1place
+finglue1place, ,1,fin
+
+
+finglue,0, ,finglue0 // приклеивает последний ноль
+finglue0, ,>,finglue0
+finglue0,0,<,finglue0place
+finglue0place, ,0,fin
+
+fin,0,>,fin  fin,1,>,fin  fin, ,#,fin // финиш
