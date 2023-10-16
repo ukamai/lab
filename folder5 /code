@@ -99,8 +99,16 @@ taskgluecheckfin,1,>,taskgluecheckfin1
 taskgluecheckfin1, ,>,glue
 taskgluecheckfin,0,>,taskgluecheckfin0
 taskgluecheckfin0, ,>,glue
-taskgluecheck,0,0,fin
-taskgluecheck,1,1,fin
+taskgluecheck,0,>,taskgluemove
+taskgluecheck,1,>,taskgluemove
+
+taskgluemove, ,>,taskgluemove
+taskgluemove,1,>,taskgluemove1
+taskgluemove,0,>,taskgluemove1
+
+taskgluemove1, ,>,taskgluemove1
+taskgluemove1,1,>,numberoneone
+taskgluemove1,0,>,numberoneone
 
 
 glue,1, ,glue1 // приклеивает единицу
@@ -121,12 +129,263 @@ finglue, ,>,finglue // передвигается к последнему при
 finglue,1, ,finglue1 // приклеивает последнюю единицу
 finglue1, ,>,finglue1
 finglue1,1,<,finglue1place
-finglue1place, ,1,fin
+finglue1,0,<,finglue1place
+finglue1place, ,1,numberoneone
 
 
 finglue,0, ,finglue0 // приклеивает последний ноль
 finglue0, ,>,finglue0
 finglue0,0,<,finglue0place
-finglue0place, ,0,fin
+finglue0,1,<,finglue0place
+finglue0place, ,0,numberoneone
 
-fin,0,>,fin  fin,1,>,fin  fin, ,#,fin // финиш
+
+numberoneone, ,<,numberoneone
+numberoneone,0,>,numberoneonezero
+numberoneone,1,>,numberoneonecheckone
+
+
+numberoneonezero,1,<,numberoneonezerodel // для нуля
+numberoneonezero,0,<,numberoneonezerodel
+numberoneonezerodel,0, ,numberoneonezerodelmove
+numberoneonezerodelmove, ,>,numberoneone
+numberoneonezero, ,<,numberoneonezerowork
+
+numberoneonezerowork,0, ,numberoneonezeroworkwork
+numberoneonezeroworkwork, ,<,numberoneonezeroworkwork
+numberoneonezeroworkwork,1,>,numberoneonezeroworkmove
+numberoneonezeroworkwork,0,>,numberoneonezeroworkmove
+
+numberoneonezeroworkmove, ,>,numberoneonezeroworkplace
+
+numberoneonezeroworkplace, ,0,numberoneonezeroworkplace
+numberoneonezeroworkplace,0,>,numberoneonezeroworkplacemove
+
+numberoneonezeroworkplacemove, ,>,numberoneonezeroworkplacemove
+numberoneonezeroworkplacemove,1,1,numbertwoone
+numberoneonezeroworkplacemove,0,0,numbertwoone
+
+
+numberoneonecheckone,1,<,numberoneoneone
+numberoneonecheckone,0,<,numberoneoneone
+numberoneonecheckone, ,<,numberonefix
+
+
+numberonefix,1, ,numberonefixmove
+numberonefixmove, ,<,numberonefixmove
+numberonefixmove,1,>,numberonefixmovemove
+numberonefixmove,0,>,numberonefixmovemove
+numberonefixmovemove, ,>,numberonefixplace
+numberonefixplace, ,1,numberonefixback
+
+numberonefixback1, ,>,numberonefixback1
+numberonefixback,1,>,numberonefixback1
+numberonefixback,0,>,numberonefixback1
+numberonefixback1,1,1,numbertwoone
+numberonefixback1,0,0,numbertwoone
+
+
+numberoneoneone,1, ,numberoneoneonework
+numberoneoneonework, ,<,numberoneoneonework
+numberoneoneonework,1,>,numberoneoneonemove
+numberoneoneonework,0,>,numberoneoneonemove
+
+numberoneoneonemove, ,>,numberoneoneoneplace
+
+numberoneoneoneplace, ,1,numberoneoneoneright
+
+numberoneoneoneright,1,>,numberoneoneonemoveback
+numberoneoneonemoveback, ,>,numberoneoneonemoveback
+numberoneoneonemoveback,1,1,numberonetwo
+numberoneoneonemoveback,0,0,numberonetwo
+
+
+
+numberonetwo,0,>,numberonetwocheck
+numberonetwo,1,>,numberonetwocheck
+numberonetwocheck,1,<,numberonetwowork
+numberonetwocheck,0,<,numberonetwowork
+numberonetwocheck, ,<,numberonefinwork
+
+
+numberonetwowork,1, ,numberonetwoworkone
+numberonetwowork,0, ,numberonetwoworkzero
+
+numberonetwoworkone, ,<,numberonetwoworkone
+numberonetwoworkone,1,>,numberonetwoworkoneplace
+numberonetwoworkone,0,>,numberonetwoworkoneplace
+numberonetwoworkoneplace, ,1,numberonetwoworkoneplace
+numberonetwoworkoneplace,1,>,numberonetwoworkonemove
+
+numberonetwoworkonemove, ,>,numberonetwoworkonemove
+numberonetwoworkonemove,1,1,numberonetwo
+numberonetwoworkonemove,0,0,numberonetwo
+
+
+numberonetwoworkzero, ,<,numberonetwoworkzero
+numberonetwoworkzero,1,>,numberonetwoworkzeroplace
+numberonetwoworkzero,0,>,numberonetwoworkzeroplace
+numberonetwoworkzeroplace, ,0,numberonetwoworkzeroplace
+numberonetwoworkzeroplace,0,>,numberonetwoworkzeromove
+
+numberonetwoworkzeromove, ,>,numberonetwoworkzeromove
+numberonetwoworkzeromove,1,1,numberonetwo
+numberonetwoworkzeromove,0,0,numberonetwo
+
+
+
+
+
+numberonefinwork,1, ,numberonefinworkone
+numberonefinwork,0, ,numberonefinworkzero
+
+numberonefinworkone, ,<,numberonefinworkone
+numberonefinworkone,1,>,numberonefinworkoneplace
+numberonefinworkone,0,>,numberonefinworkoneplace
+numberonefinworkoneplace, ,1,numberonefinworkoneplace
+numberonefinworkoneplace,1,>,numberonefinworkonemove
+
+numberonefinworkonemove, ,>,numberonefinworkonemove
+numberonefinworkonemove,1,1,numbertwoone
+numberonefinworkonemove,0,0,numbertwoone
+
+
+numberonefinworkzero, ,<,numberonefinworkzero
+numberonefinworkzero,1,>,numberonefinworkzeroplace
+numberonefinworkzero,0,>,numberonefinworkzeroplace
+numberonefinworkzeroplace, ,0,numberonefinworkzeroplace
+numberonefinworkzeroplace,0,>,numberonefinworkzeromove
+
+numberonefinworkzeromove, ,>,numberonefinworkzeromove
+numberonefinworkzeromove,1,1,numbertwoone
+numberonefinworkzeromove,0,0,numbertwoone
+
+
+
+
+
+// начало второго числа
+
+numbertwoone,0,>,numbertwoonezero
+numbertwoone,1,>,numbertwoonecheckone
+
+
+numbertwoonezero,1,<,numbertwoonezerodel // для нуля
+numbertwoonezero,0,<,numbertwoonezerodel
+numbertwoonezerodel,0, ,numbertwoonezerodelmove
+numbertwoonezerodelmove, ,>,numbertwoone
+numbertwoonezero, ,<,numbertwoonezerowork
+
+numbertwoonezerowork,0, ,numbertwoonezeroworkwork
+numbertwoonezeroworkwork, ,<,numbertwoonezeroworkwork
+numbertwoonezeroworkwork,1,>,numbertwoonezeroworkmove
+numbertwoonezeroworkwork,0,>,numbertwoonezeroworkmove
+
+numbertwoonezeroworkmove, ,>,numbertwoonezeroworkplace
+
+numbertwoonezeroworkplace, ,0,numbertwoonezeroworkplace
+numbertwoonezeroworkplace,0,>,numbertwoonezeroworkplacemove
+
+numbertwoonezeroworkplacemove, , ,numbertwoonezeroworkplacemove
+numbertwoonezeroworkplacemove,1,1,fin
+numbertwoonezeroworkplacemove,0,0,fin
+
+
+numbertwoonecheckone,1,<,numbertwooneone
+numbertwoonecheckone,0,<,numbertwooneone
+numbertwoonecheckone, ,<,numbertwofix
+
+
+
+numbertwofix,1, ,numbertwofixmove
+numbertwofixmove, ,<,numbertwofixmove
+numbertwofixmove,1,>,numbertwofixmovemove
+numbertwofixmove,0,>,numbertwofixmovemove
+numbertwofixmovemove, ,>,numbertwofixplace
+numbertwofixplace, ,1,numbertwofixback
+
+numbertwofixback1, , ,fin
+numbertwofixback,1,>,numbertwofixback1
+numbertwofixback,0,>,numbertwofixback1
+
+
+
+
+numbertwooneone,1, ,numbertwooneonework
+numbertwooneonework, ,<,numbertwooneonework
+numbertwooneonework,1,>,numbertwooneonemove
+numbertwooneonework,0,>,numbertwooneonemove
+
+numbertwooneonemove, ,>,numbertwooneoneplace
+
+numbertwooneoneplace, ,1,numbertwooneoneright
+
+numbertwooneoneright,1,>,numbertwooneonemoveback
+numbertwooneonemoveback, ,>,numbertwooneonemoveback
+numbertwooneonemoveback,1,1,numbertwotwo
+numbertwooneonemoveback,0,0,numbertwotwo
+
+
+
+numbertwotwo,0,>,numbertwotwocheck
+numbertwotwo,1,>,numbertwotwocheck
+numbertwotwocheck,1,<,numbertwotwowork
+numbertwotwocheck,0,<,numbertwotwowork
+numbertwotwocheck, ,<,numbertwofinwork
+
+
+numbertwotwowork,1, ,numbertwotwoworkone
+numbertwotwowork,0, ,numbertwotwoworkzero
+
+numbertwotwoworkone, ,<,numbertwotwoworkone
+numbertwotwoworkone,1,>,numbertwotwoworkoneplace
+numbertwotwoworkone,0,>,numbertwotwoworkoneplace
+numbertwotwoworkoneplace, ,1,numbertwotwoworkoneplace
+numbertwotwoworkoneplace,1,>,numbertwotwoworkonemove
+
+numbertwotwoworkonemove, ,>,numbertwotwoworkonemove
+numbertwotwoworkonemove,1,1,numbertwotwo
+numbertwotwoworkonemove,0,0,numbertwotwo
+
+
+numbertwotwoworkzero, ,<,numbertwotwoworkzero
+numbertwotwoworkzero,1,>,numbertwotwoworkzeroplace
+numbertwotwoworkzero,0,>,numbertwotwoworkzeroplace
+numbertwotwoworkzeroplace, ,0,numbertwotwoworkzeroplace
+numbertwotwoworkzeroplace,0,>,numbertwotwoworkzeromove
+
+numbertwotwoworkzeromove, ,>,numbertwotwoworkzeromove
+numbertwotwoworkzeromove,1,1,numbertwotwo
+numbertwotwoworkzeromove,0,0,numbertwotwo
+
+
+
+
+
+numbertwofinwork,1, ,numbertwofinworkone
+numbertwofinwork,0, ,numbertwofinworkzero
+
+numbertwofinworkone, ,<,numbertwofinworkone
+numbertwofinworkone,1,>,numbertwofinworkoneplace
+numbertwofinworkone,0,>,numbertwofinworkoneplace
+numbertwofinworkoneplace, ,1,numbertwofinworkoneplace
+numbertwofinworkoneplace,1,>,numbertwofinworkonemove
+
+numbertwofinworkonemove, , ,numbertwofinworkonemove
+numbertwofinworkonemove,1,1,fin
+numbertwofinworkonemove,0,0,fin
+
+
+numbertwofinworkzero, ,<,numbertwofinworkzero
+numbertwofinworkzero,1,>,numbertwofinworkzeroplace
+numbertwofinworkzero,0,>,numbertwofinworkzeroplace
+numbertwofinworkzeroplace, ,0,numbertwofinworkzeroplace
+numbertwofinworkzeroplace,0,>,numbertwofinworkzeromove
+
+numbertwofinworkzeromove, , ,numbertwofinworkzeromove
+numbertwofinworkzeromove,1,1,fin
+numbertwofinworkzeromove,0,0,fin
+
+fin,1,>,fin
+fin,0,>,fin
+fin, ,#,fin
