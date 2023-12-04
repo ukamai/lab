@@ -7,120 +7,60 @@
 
 Преподаватель: каф. 806 Севастьянов Виктор Сергеевич
 
-1. **Тема**: 
-2. **Цель работы**:
-3. **Задание (вариант №24)**:
+1. **Тема**: Обработка последовательности литер входного текстового файла.
+2. **Цель работы**: Написать программу, выполняющую поставленную задачу.
+3. **Задание (вариант №19)**: Отсечь первую и последние цифры числа
 4. **Протокол**: 
 
 
 ```
-#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 
-typedef enum _state {
-    GET_NUM,
-    GET_RESULT_POSITIVE,
-    GET_RESULT_NEGATIVE
-} Estate;
+int change(int number, int c)
+{
+    int l = 10;
+    for (int k = 0; k < c - 2; k++)
+    {
+        l *= 10;
+    }
+    number = number % l;
+    number = number / 10;
+    return number;
+}
 
-int isSep();
-
-int isdigit();
-
-int isMinus();
-
-int main() {
-    Estate state = GET_NUM;
-    int ch, count;
-    char rab[20];
-
-    while ((ch = getchar()) != EOF) {
-        switch (state) {
-            case GET_NUM:
-                if (isdigit(ch))
-                {
-                    for (int k; k < sizeof(rab); k++)
-                    {
-                        rab[k] = 0;
-                    }
-                    rab[0] = ch;
-                    count = 1;
-                    state = GET_RESULT_POSITIVE;
-                }
-                if (isMinus(ch))
-                {
-                    for (int k; k < sizeof(rab); k++)
-                    {
-                        rab[k] = 0;
-                    }
-                    count = 0;
-                    state = GET_RESULT_NEGATIVE;
-                }
-                break;
-            case GET_RESULT_POSITIVE:
-                if (isdigit(ch))
-                {
-                    rab[count] = ch;
-                    count += 1;
-                    state = GET_RESULT_POSITIVE;
-                }
-                if (isSep(ch))
-                {
-                    if (count <= 2)
-                    {
-                    printf("Если убрать крайние числа, длина числа нулевая\n");
-                    state = GET_NUM;
-                    }
-                    else
-                    {
-                    printf("Изменённое число: ");
-                    for (int k = 1; k < count - 1; k++)
-                    {
-                    printf("%d", rab[k] - 48);
-                    }
-                    printf("\n");
-                    state = GET_NUM;
-                    }
-                }
-                break;
-            case GET_RESULT_NEGATIVE:
-                if (isdigit(ch))
-                {
-                    rab[count] = ch;
-                    count += 1;
-                    state = GET_RESULT_NEGATIVE;
-                }
-                if (isSep(ch))
-                {
-                    if (count <= 2)
-                    {
-                    printf("Если убрать крайние числа, длина числа нулевая\n");
-                    state = GET_NUM;
-                    }
-                    else
-                    {
-                    printf("Изменённое число: -");
-                    for (int k = 1; k < count - 1; k++)
-                    {
-                    printf("%d", rab[k] - 48);
-                    }
-                    printf("\n");
-                    state = GET_NUM;
-                    }
-                }
-                break;
+int main()
+{
+    int k = 0, chislo, a, length;
+    while (k != 1)
+    {
+        printf("Введите число: ");
+        scanf("%d", &chislo);
+        a = chislo;
+        length = 0;
+        while (a != 0)
+        {
+            a = a / 10;
+            length += 1;
+        }
+        if (length <= 2)
+        {
+            printf("\n");
+        }
+        else
+        {
+        if (chislo > 0)
+        {
+            printf("%d\n", change(chislo, length));
+        }
+        else
+        {
+            chislo = chislo * -1;
+            printf("%d\n", change(chislo, length) * -1);
+        }
         }
     }
+
     return 0;
 }
-
-int isMinus(int ch)
-{
-    return (ch == '-');
-}
-
-int isSep(int ch)
-{
-    return (ch == ' ' || ch == ',' || ch == '\n' || ch == '\t');
-}
 ```
+
